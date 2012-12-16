@@ -1,0 +1,11 @@
+
+According to Watkins paper http://arxiv.org/abs/math/0604095
+the curve
+
+sage: E = EllipticCurve('40a3')
+
+has Symm^9(E,*) = 0  (I don't know the order of vanishing).
+
+sage: time p = draw_plot(E,10e6,[(9,1)])
+Time: CPU 70.82 s, Wall: 70.93 s
+sage: p.save(figsize=[12,4],'40a.pdf')        
