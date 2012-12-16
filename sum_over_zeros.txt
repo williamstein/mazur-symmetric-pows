@@ -1,0 +1,26 @@
+sage: attach data.pyx
+sage:  time z = ZeroSums(EllipticCurve('40a3'), 5000)
+  ***   Warning: new stack size = 2900144 (2.766 Mbytes).
+Time: CPU 0.16 s, Wall: 51.77 s
+sage: a = animate([line(z.partial_sums(1e6+100*i)) for i in [0..20]])
+sage: a.save('zero_sums-1e6-animation.gif')
+sage: a.save('zero_sums-1e6-animation.gif')
+sage: a = animate([line(z.partial_sums(1e6+100*i)) for i in [0..30]], ymin=-0.02,ymax=0.02)
+sage: time a.save('zero_sums-1e6-animation-two.gif')
+Time: CPU 13.50 s, Wall: 20.09 s
+sage: a = animate([line(z.partial_sums(1e6+100*i)) for i in [0..100]], ymin=-0.02,ymax=0.04)
+sage: a.save('zero_sums-1e6-animation-three.gif')
+
+sage: a = animate([line(z.partial_sums(10^6+50*i))+text("X=%s"%(10^6+50*i),(1000,-0.005),color='black') for i in [0..200]], ymin=-0.01, ymax=0.03)
+sage: time a.save('zero_sums-1e6-animation-four.gif')
+
+
+
+
+
+
+
+
+
+
+

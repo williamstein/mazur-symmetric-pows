@@ -66,7 +66,23 @@ def draw_plot(E, B, vanishing_symmetric_powers=None):
     g += line(running_average, color='green')
     return g
 
-# THIS NEVER HAPPENED -- not clear if it is meaningful
+class ZeroSums(object):
+    def __init__(self, E, zeros):
+        self.E = E
+        if not isinstance(zeros, list):
+            zeros = E.lseries().zeros(zeros)
+        self.zeros = [float(x) for x in zeros]
+
+    def partial_sums(self, double X):  
+        cdef int i
+        cdef double logX = log(X), running_sum = 0
+        result = []
+        for i in range(len(self.zeros)):
+            running_sum += cos(logX*self.zeros[i])/self.zeros[i]/logX
+            result.append((i, running_sum))
+        return result
+
+# NOTHING TO SEE HERE -- THIS NEVER HAPPENED -- not clear if it is meaningful
 # def zero_sums(E, zeros, B, prec=10000):
 #     #
 #     # E -- elliptic curve
