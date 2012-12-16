@@ -2,11 +2,14 @@
 # Efficiently compute raw sum for a given elliptic curve
 # (c) William Stein
 #########################################################
-from sage.all import prime_range
+from sage.all import prime_range, line
+import math
 
 cdef extern from "math.h":
     double log(double)
     double sqrt(double)
+
+cdef double pi = math.pi
 
 def raw_data(E, B):
     """
@@ -29,3 +32,17 @@ def raw_data(E, B):
         X = primes[i]
         result.append((primes[i], (log(X) / sqrt(X)) * cnt))
     return result
+
+def draw_plot(E, B, vanishing_symmetric_powers=None):
+    if vanishing_symmetric_powers is None:
+        vanishing_symmetric_powers = []
+    r = E.rank()
+    mean = 2/pi - 16/(3*pi)*r
+    for n, order in vanishing_symmetric_powers:
+        assert n%2 != 0
+        k = (n-1)/2
+        mean += (4/pi) * (-1)**(k+1)*(1/(2*k+1) + 1/(2*k+3))*order
+    d = raw_data(E, B)
+    g = line(d)
+    g += line([(0,mean), (d[-1][0],mean)], color='darkred')
+    return g
