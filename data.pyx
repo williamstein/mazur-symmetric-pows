@@ -8,6 +8,7 @@ import math
 cdef extern from "math.h":
     double log(double)
     double sqrt(double)
+    double cos(double)
 
 cdef double pi = math.pi
 
@@ -65,3 +66,31 @@ def draw_plot(E, B, vanishing_symmetric_powers=None):
     g += line(running_average, color='green')
     return g
 
+# THIS NEVER HAPPENED -- not clear if it is meaningful
+# def zero_sums(E, zeros, B, prec=10000):
+#     #
+#     # E -- elliptic curve
+#     # B -- positive integer
+#     # zeroes -- list of imag parts of zeros or an integer (in which case list is computed)
+#     #           it takes about 5 seconds to compute 1000 zeros...
+#     #
+#     if not isinstance(zeros, list):
+#         zeros = E.lseries().zeros(zeros)
+
+#     # we evaluate at primes up to B.
+#     primes = prime_range(B)
+#     log_primes = [log(p) for p in primes]
+
+#     def zero_sum(double x):
+#         return 2*sum(cos(g*x) for g in zeros)
+
+#     zero_sums_function = []
+#     running_average_function = []
+#     cdef int i
+#     cdef double z, sum_so_far=0
+#     for i in range(len(primes)):
+#         z = zero_sum(log_primes[i])
+#         sum_so_far += z*(primes[i]-primes[i-1])
+#         n += 1
+#         zero_sums_function.append((i, z))
+        
