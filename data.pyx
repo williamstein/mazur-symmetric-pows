@@ -43,24 +43,25 @@ def raw_data(E, B):
         avgs.append((primes[i], running_sum/X))
     return result, avgs
 
-def draw_plot(E, B, vanishing_symmetric_powers=None):
-    if vanishing_symmetric_powers is None:
-        vanishing_symmetric_powers = []
-    r = E.rank()
+def the_mean(r, vanishing_symmetric_powers):
+    """
+    INPUT:
+
+    """
     mean = 2/pi - 16/(3*pi)*r
     for n, order in vanishing_symmetric_powers:
         assert n%2 != 0
         k = (n-1)/2
         mean += (4/pi) * (-1)**(k+1)*(1/(2*k+1) + 1/(2*k+3))*order
+    return mean
+
+def draw_plot(E, B, vanishing_symmetric_powers=None):
+    if vanishing_symmetric_powers is None:
+        vanishing_symmetric_powers = []
+    mean = the_mean(E.rank(), vanishing_symmetric_powers)
     d, running_average = raw_data(E, B)
     g = line(d)
     g += line([(0,mean), (d[-1][0],mean)], color='darkred')
     g += line(running_average, color='green')
     return g
 
-def the_mean(vanishing_symmetric_powers):
-    """
-    INPUT:
-
-    """
-    pass
