@@ -58,5 +58,9 @@ def draw_plot(E, B, vanishing_symmetric_powers=None):
     g += line(running_average, color='green')
     return g
 
+def the_mean(vanishing_symmetric_powers):
+    """
+    INPUT:
 
-# 2379b1  symmetric cube 4th order zero
+    """
+    pass

@@ -1,0 +1,8 @@
+According to Watkins, 2379b1 has Symm^3 vanishing to order 4.
+
+sage: E = EllipticCurve('2379b1')
+sage: time p = draw_plot(E,1e7,[(3,4)]) 
+Time: CPU 48.72 s, Wall: 48.77 s
+sage: p.save('2379b1.pdf', figsize=[12,4])
+
+
